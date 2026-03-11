@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+    <div class="user-info" *ngIf="authService.currentUser() as user">
+      <span class="username">{{ user.username }}</span>
+      <span *ngFor="let role of user.roles" class="role-badge" [class.admin-badge]="role === 'Admin'">
+        {{ role }}
+      </span>
+      <button class="btn btn-logout" (click)="authService.logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Welcome Banner -->
+  <div class="card welcome-card" *ngIf="summary">
+    <h2>{{ summary.message }}</h2>
+    <p class="server-time">Server time: {{ summary.serverTime | date:'medium' }}</p>
+  </div>
+
+  <!-- User Tasks Section -->
+  <div class="card" *ngIf="userData">
+    <h2>📋 My Tasks</h2>
+    <p class="card-subtitle">{{ userData.message }}</p>
+    <ul class="task-list">
+      <li *ngFor="let item of userData.items" [class.completed]="item.completed">
+        <span class="task-check">{{ item.completed ? '✅' : '⬜' }}</span>
+        {{ item.title }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Admin Section -->
+  <div class="card admin-card" *ngIf="authService.isAdmin()">
+    <h2>🔐 Admin Panel</h2>
+    <div *ngIf="isLoadingAdmin" class="loading">Loading admin data…</div>
+    <div *ngIf="adminError" class="alert alert-error">{{ adminError }}</div>
+    <div *ngIf="adminData">
+      <p class="card-subtitle">{{ adminData.message }}</p>
+      <div class="secret-box">
+        <strong>Secret:</strong> {{ adminData.secret }}
+      </div>
+      <h3>User List</h3>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of adminData.users">
+            <td>{{ u.id }}</td>
+            <td>{{ u.name }}</td>
+            <td>
+              <span class="role-badge" [class.admin-badge]="u.role === 'Admin'">{{ u.role }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
