@@ -1,0 +1,12 @@
+<nav class="navbar">
+  <a routerLink="/" class="brand">Practice App</a>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="/dashboard" routerLinkActive="active" *ngIf="authService.isLoggedIn()">Dashboard</a>
+    <a routerLink="/login" routerLinkActive="active" *ngIf="!authService.isLoggedIn()">Login</a>
+    <button *ngIf="authService.isLoggedIn()" class="logout-btn" (click)="authService.logout()">
+      Logout
+    </button>
+  </div>
+</nav>
+

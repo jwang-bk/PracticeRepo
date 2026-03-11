@@ -1,0 +1,47 @@
+<div class="home-container">
+  <div class="hero">
+    <h1>Angular + C# Practice App</h1>
+    <p class="subtitle">A full-stack application with JWT authentication and role-based access control.</p>
+    <div class="cta-buttons">
+      <a routerLink="/dashboard" *ngIf="authService.isLoggedIn()" class="btn btn-primary">
+        Go to Dashboard
+      </a>
+      <a routerLink="/login" *ngIf="!authService.isLoggedIn()" class="btn btn-primary">
+        Get Started
+      </a>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <span class="feature-icon">🔐</span>
+      <h3>JWT Authentication</h3>
+      <p>Secure login with JSON Web Tokens. Tokens are stored locally and sent with each request.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">👥</span>
+      <h3>Role-Based Access</h3>
+      <p>Two roles: <strong>Admin</strong> and <strong>User</strong>. Admins can access extra data and manage users.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚀</span>
+      <h3>Angular + C# 10</h3>
+      <p>Modern Angular standalone components on the frontend, ASP.NET Core 10 Web API on the backend.</p>
+    </div>
+  </div>
+
+  <div class="demo-info">
+    <h2>Demo Credentials</h2>
+    <div class="credentials">
+      <div class="cred-card">
+        <strong>Admin</strong>
+        <code>admin / Admin123!</code>
+      </div>
+      <div class="cred-card">
+        <strong>User</strong>
+        <code>user / User123!</code>
+      </div>
+    </div>
+  </div>
+</div>
+
